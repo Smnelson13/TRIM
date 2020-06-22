@@ -13,8 +13,7 @@ class SubmitViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func submitButtonTap(_ sender: Any) {

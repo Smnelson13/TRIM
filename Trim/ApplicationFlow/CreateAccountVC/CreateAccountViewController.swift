@@ -82,6 +82,7 @@ class CreateAccountViewController: UIViewController {
         }
     }
     
+    // TODO - Make into it's own init that is shared between views.
     func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title , message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))

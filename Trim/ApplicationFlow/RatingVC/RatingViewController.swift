@@ -33,6 +33,7 @@ class RatingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        self.setTextFieldDelegates()
     }
     
     func setupUI() {
@@ -41,9 +42,22 @@ class RatingViewController: UIViewController {
     }
     
     @IBAction func saveButtonTap(_ sender: Any) {
-        navigateToSubmitViewController()
+        if pointsAreValid() {
+            print("Points are valid")
+        } else {
+            showAlert(title: "Error", message: "Points Cannot be greater than 50.")
+        }
+        //navigateToSubmitViewController()
     }
     
+    func setTextFieldDelegates() {
+        let textFields = getAllTextFields(fromView: self.view)
+        textFields.forEach({ textField in
+            textField.delegate = self
+        })
+    }
+    
+    // Shared function use for setting delegates and updating the remaining points.
     func getAllTextFields(fromView view: UIView)-> [UITextField] {
         return view.subviews.compactMap { (view) -> [UITextField]? in
             if view is UITextField {
@@ -72,6 +86,26 @@ class RatingViewController: UIViewController {
         //pointsRemaining = sumOfTextFields
     }
     
+    func pointsAreValid() -> Bool {
+        var textFieldValues: [Int] = []
+        let textFields = getAllTextFields(fromView: self.view)
+        
+        textFields.forEach({ textField in
+            if let text = textField.text {
+                if let textAsNumber = Int(text) {
+                    textFieldValues.insert(textAsNumber, at: 0)
+                }
+            }
+        })
+        
+        let sumOfTextFieldValues = textFieldValues.reduce(0, +)
+        
+        if sumOfTextFieldValues > 50 {
+            return false
+        }
+        return true
+    }
+    
     func navigateToSubmitViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -83,10 +117,17 @@ class RatingViewController: UIViewController {
         }
     }
     
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title , message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 extension RatingViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         updatePointsRemaining()
         let nextTag = textField.tag + 1
         if let nextResponder = textField.superview?.viewWithTag(nextTag) {

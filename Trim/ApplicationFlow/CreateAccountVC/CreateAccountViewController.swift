@@ -36,7 +36,6 @@ class CreateAccountViewController: UIViewController {
 //    }
 
     @IBAction func createAccountButtonTap(_ sender: Any) {
-        print("Tap")
         createUser()
     }
     
@@ -46,9 +45,10 @@ class CreateAccountViewController: UIViewController {
     
     func createUser() {
         if textFieldsSatisfied() {
+            // TODO - Add Spinner and disable user taps.
             if let email = userEmail, let password = userPassword {
                 store.createUser(withEmail: email, withPassword: password, handler: { handler in
-                    
+                    self.render(handler)
                 })
             }
         } else {
@@ -65,6 +65,8 @@ class CreateAccountViewController: UIViewController {
         }
         return false
     }
+    
+    func navigateTo
     
     func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title , message: message, preferredStyle: .alert)
@@ -96,7 +98,7 @@ private extension CreateAccountViewController {
         case .invalidEmail:
             break
         case .userAlreadyExists:
-            break
+            showAlert(title: "Error", message: "A user with that email already exists.")
         case .userCreated:
             showAlert(title: "Success", message: "User Created")
             print("User Created!")

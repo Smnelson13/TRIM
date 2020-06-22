@@ -517,6 +517,9 @@
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="submitButtonTap:" destination="PX3-s4-FWh" eventType="touchUpInside" id="UBv-bI-vHn"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="54c-p3-zQX">
                                         <rect key="frame" x="16" y="16" width="318" height="184"/>

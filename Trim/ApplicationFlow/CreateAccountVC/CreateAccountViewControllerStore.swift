@@ -8,13 +8,26 @@
 
 import Foundation
 import FirebaseAuth
+import RxSwift
 
 class CreateAccountStore {
     
     typealias Handler = (CreateAccountViewControllerState) -> Void
     let defaults = UserDefaults.standard
+    let disposeBag = DisposeBag()
     
     func createUser(withEmail email: String, withPassword password: String, handler: @escaping Handler) {
+        
+        Auth.auth().rx.base.createUser(withEmail: email, password: password)
+        
+        Auth.auth().rx.base.createUser(withEmail: "xxx@xxx.com", password: "1q2w3e4r").subscribe(onNext: { authResult in
+            // User signed in
+        }, onError: { error in
+            // Uh-oh, an error occurred!
+        }).disposed(by: disposeBag)
+        
+        
+        
         Auth.auth().createUser(withEmail: email, password: password, completion: { result, error in
             if let error = error {
                 switch (error as NSError).code {
@@ -34,5 +47,11 @@ class CreateAccountStore {
                 handler(.userCreated)
             }
         })
+    }
+    
+    
+    func createRxUser(email: String, password: String) -> Observable<Result<Any, Error>> {
+        
+        
     }
 }

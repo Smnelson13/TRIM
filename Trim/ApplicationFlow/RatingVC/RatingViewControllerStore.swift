@@ -18,36 +18,34 @@ class RatingViewControllerStore {
     let ref = Database.database().reference()
     
     
-    func saveTextFieldInfo(uikit: String,
-                        modularDevelopment: String,
-                        memoryManagement: String,
-                        testing: String,
-                        coreData: String,
-                        debugging: String,
-                        problemSolving: String,
-                        swiftUI: String,
-                        workingOnTeam: String,
-                        selfMotivation: String,
-                        communication: String,
-                        energyLevel: String,
-                        intelligence: String,
-                           handler: @escaping Handler) {
-        
+    func saveTextFieldInfo(_ user: User) -> Observable<User> {
         guard let userId = auth.currentUser?.uid else {
-            return
+            return Observable.error(RxError.noElements)
         }
-        ref.child(userId).setValuesForKeys(["UIKit": uikit,
-                                            "Modular development": modularDevelopment,
-                                            "Memory Management (ARC)": memoryManagement,
-                                            "Testing": testing,
-                                            "Core Data": coreData,
-                                            "Debugging": debugging,
-                                            "Problem Solving": problemSolving,
-                                            "SwiftUI / Combine": swiftUI,
-                                            "Working on a team": workingOnTeam,
-                                            "Self Motivation": selfMotivation,
-                                            "Communication": communication,
-                                            "Energy Level": energyLevel,
-            "Intelligence": intelligence])
+        return Observable.create { observer in
+            
+        }
     }
 }
+
+
+/*
+ func saveTextFieldInfo(uikit: String,
+                     modularDevelopment: String,
+                     memoryManagement: String,
+                     testing: String,
+                     coreData: String,
+                     debugging: String,
+                     problemSolving: String,
+                     swiftUI: String,
+                     workingOnTeam: String,
+                     selfMotivation: String,
+                     communication: String,
+                     energyLevel: String,
+                     intelligence: String) -> Observable<User> {
+     
+     guard let userId = auth.currentUser?.uid else {
+         return Observable.error(RxError.noElements)
+     }
+ }
+ */

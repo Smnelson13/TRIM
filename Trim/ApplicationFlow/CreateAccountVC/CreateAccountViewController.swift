@@ -40,7 +40,7 @@ class CreateAccountViewController: UIViewController {
     }
     
     @IBAction func loginButtonTap(_ sender: Any) {
-        print("Tap")
+        navigateToRatingViewController()
     }
     
     func createUser() {
@@ -66,7 +66,16 @@ class CreateAccountViewController: UIViewController {
         return false
     }
     
-    func navigateTo
+    func navigateToRatingViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let ratingViewController = storyboard.instantiateViewController(withIdentifier: "RatingViewController") as? RatingViewController {
+            ratingViewController.modalPresentationStyle = .fullScreen
+            self.present(ratingViewController, animated: true, completion: nil)
+        } else {
+            preconditionFailure("Could not navigate to RatingViewController")
+        }
+    }
     
     func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title , message: message, preferredStyle: .alert)

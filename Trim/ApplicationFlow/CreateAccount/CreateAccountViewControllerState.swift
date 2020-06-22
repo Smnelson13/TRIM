@@ -6,4 +6,11 @@
 //  Copyright © 2020 Shane Nelson. All rights reserved.
 //
 
-import Foundation
+enum CreateAccountViewControllerState {
+    case userCreated
+    case creatingUserFailure(Error)
+    case invalidEmail
+    case userAlreadyExists
+    case invalidPassword
+}
+

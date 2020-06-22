@@ -11,8 +11,8 @@ import UIKit
 class RatingViewController: UIViewController {
     
     var pointsRemaining: Int?
-    var textFieldTextAsIntArray: [Int]?
-
+    private let store = RatingViewControllerStore()
+    
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var pointsRemainingTextField: UITextField!
     
@@ -39,15 +39,37 @@ class RatingViewController: UIViewController {
     func setupUI() {
         backgroundView.layer.cornerRadius = 2
         pointsRemainingTextField.isUserInteractionEnabled = false
+        pointsRemainingTextField.text = "50"
     }
     
     @IBAction func saveButtonTap(_ sender: Any) {
-        if pointsAreValid() {
-            print("Points are valid")
-        } else {
-            showAlert(title: "Error", message: "Points Cannot be greater than 50.")
-        }
-        //navigateToSubmitViewController()
+//        self.view.isUserInteractionEnabled = false
+//
+//        if pointsAreValid() {
+//            print("Points are valid")
+//            saveInfo()
+//        } else {
+//            showAlert(title: "Error", message: "Points Cannot be greater than 50.")
+//        }
+        navigateToSubmitViewController()
+    }
+    
+    func saveInfo() {
+        store.saveTextFieldInfo(uikit: uikitTextField.text ?? "",
+                                modularDevelopment: modularDevelopmentTextField.text ?? "",
+                                memoryManagement: memoryManagementTextField.text ?? "",
+                                testing: testingTextField.text ?? "",
+                                coreData: coreDataTextField.text ?? "",
+                                debugging: debuggingTextField.text ?? "",
+                                problemSolving: problemSolvingTextField.text ?? "",
+                                swiftUI: SwiftUITextField.text ?? "",
+                                workingOnTeam: workingOnTeamTextField.text ?? "",
+                                selfMotivation: selfMotivationTextField.text ?? "",
+                                communication: communicationSkillsTextField.text ?? "",
+                                energyLevel: energyLevelTextField.text ?? "",
+                                intelligence: intelligenceTextField.text ?? "", handler: { handler in
+                                    self.render(handler)
+        })
     }
     
     func setTextFieldDelegates() {
@@ -69,20 +91,24 @@ class RatingViewController: UIViewController {
     }
     
     func updatePointsRemaining() {
-        textFieldTextAsIntArray = [] // Reset the array each time.
+        var textFieldTextAsIntArray: [Int] = []
+        //textFieldTextAsIntArray = [] // Reset the array each time.
         pointsRemaining = 0
         
         let textFields = getAllTextFields(fromView: self.view)
         
         textFields.forEach({ textField in
-            if let text = textField.text, var textFieldArray = textFieldTextAsIntArray {
+            if let text = textField.text {
                 if let textAsNumber = Int(text) {
-                    textFieldArray.insert(textAsNumber, at: 0)
+                    textFieldTextAsIntArray.insert(textAsNumber, at: 0)
                 }
+//                else {
+//                    print("Failed to cast string as Int.")
+//                }
             }
         })
-        let sumOfTextFields = textFieldTextAsIntArray?.reduce(0, +)
-        pointsRemainingTextField.text = "\(String(describing: sumOfTextFields))"
+        let sumOfTextFields = (50 - textFieldTextAsIntArray.reduce(0, +))
+        pointsRemainingTextField.text = "\(sumOfTextFields)"
         //pointsRemaining = sumOfTextFields
     }
     
@@ -142,12 +168,16 @@ extension RatingViewController: UITextFieldDelegate {
 //MARK: - Render
 private extension RatingViewController {
     func render(_ state: RatingViewControllerState) {
+        
+        self.view.isUserInteractionEnabled = true
+        
         switch state {
         case .saving:
             break
         case .saved:
             break
         case .errorSaving(let error):
+            
             print(error.localizedDescription)
         }
     }

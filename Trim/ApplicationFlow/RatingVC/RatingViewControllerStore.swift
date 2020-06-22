@@ -9,27 +9,28 @@
 import Foundation
 import FirebaseAuth
 import FirebaseDatabase
+import RxSwift
 
 class RatingViewControllerStore {
     
-    typealias Handler = (RatingViewController) -> Void
+    typealias Handler = (RatingViewControllerState) -> Void
     let auth = Auth.auth()
     let ref = Database.database().reference()
     
     
-    func saveTextFieldInfo(withRating uikit: Int,
-                           withRating modularDevelopment: Int,
-                           withRating memoryManagement: Int,
-                           withRating testing: Int,
-                           withRating coreData: Int,
-                           withRating debugging: Int,
-                           withRating problemSolving: Int,
-                           withRating swiftUI: Int,
-                           withRating workingOnTeam: Int,
-                           withRating selfMotivation: Int,
-                           withRating communication: Int,
-                           withRating energyLevel: Int,
-                           withRating intelligence: Int,
+    func saveTextFieldInfo(uikit: String,
+                        modularDevelopment: String,
+                        memoryManagement: String,
+                        testing: String,
+                        coreData: String,
+                        debugging: String,
+                        problemSolving: String,
+                        swiftUI: String,
+                        workingOnTeam: String,
+                        selfMotivation: String,
+                        communication: String,
+                        energyLevel: String,
+                        intelligence: String,
                            handler: @escaping Handler) {
         
         guard let userId = auth.currentUser?.uid else {
@@ -47,6 +48,6 @@ class RatingViewControllerStore {
                                             "Self Motivation": selfMotivation,
                                             "Communication": communication,
                                             "Energy Level": energyLevel,
-                                            "Intelligence": intelligence])
+            "Intelligence": intelligence])
     }
 }

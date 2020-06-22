@@ -23,6 +23,8 @@
 		90C49AB624A05517007CC1A6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C49AB524A05516007CC1A6 /* Colors.swift */; };
 		90C49AC224A06192007CC1A6 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C49AC124A06192007CC1A6 /* RatingViewController.swift */; };
 		90C49AC624A06C09007CC1A6 /* MuseoSans_500.otf in Resources */ = {isa = PBXBuildFile; fileRef = 90C49AC524A06BC9007CC1A6 /* MuseoSans_500.otf */; };
+		90C49AC824A0796A007CC1A6 /* RatingViewControllerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C49AC724A0796A007CC1A6 /* RatingViewControllerState.swift */; };
+		90C49ACA24A079DB007CC1A6 /* RatingViewControllerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C49AC924A079DB007CC1A6 /* RatingViewControllerStore.swift */; };
 		9CD2B6DE69E75DEAFB4FFDD5 /* Pods_Trim_TrimUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FDC1B103657ACC42260040 /* Pods_Trim_TrimUITests.framework */; };
 		F08ABAABD239E96EEE88D9EE /* Pods_Trim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBFF946E6BE33CC9C9BDC21 /* Pods_Trim.framework */; };
 /* End PBXBuildFile section */
@@ -72,6 +74,8 @@
 		90C49AB524A05516007CC1A6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		90C49AC124A06192007CC1A6 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		90C49AC524A06BC9007CC1A6 /* MuseoSans_500.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MuseoSans_500.otf; path = "../../../../../Downloads/exljbris/Museo™ Sans/MuseoSans_500.otf"; sourceTree = "<group>"; };
+		90C49AC724A0796A007CC1A6 /* RatingViewControllerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewControllerState.swift; sourceTree = "<group>"; };
+		90C49AC924A079DB007CC1A6 /* RatingViewControllerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewControllerStore.swift; sourceTree = "<group>"; };
 		B5B971A0E9DFBE9B8ED04AD3 /* Pods-TrimTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrimTests.release.xcconfig"; path = "Target Support Files/Pods-TrimTests/Pods-TrimTests.release.xcconfig"; sourceTree = "<group>"; };
 		BFBFF946E6BE33CC9C9BDC21 /* Pods_Trim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA8847B9456434147F2DB879 /* Pods-Trim-TrimUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trim-TrimUITests.debug.xcconfig"; path = "Target Support Files/Pods-Trim-TrimUITests/Pods-Trim-TrimUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -216,6 +220,8 @@
 			isa = PBXGroup;
 			children = (
 				90C49AC124A06192007CC1A6 /* RatingViewController.swift */,
+				90C49AC724A0796A007CC1A6 /* RatingViewControllerState.swift */,
+				90C49AC924A079DB007CC1A6 /* RatingViewControllerStore.swift */,
 			);
 			path = RatingVC;
 			sourceTree = "<group>";
@@ -471,8 +477,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				90C49AA924A04D6F007CC1A6 /* CreateAccountViewController.swift in Sources */,
+				90C49ACA24A079DB007CC1A6 /* RatingViewControllerStore.swift in Sources */,
 				90C49AC224A06192007CC1A6 /* RatingViewController.swift in Sources */,
 				90C49AB424A054F8007CC1A6 /* Extensions+Utils.swift in Sources */,
+				90C49AC824A0796A007CC1A6 /* RatingViewControllerState.swift in Sources */,
 				90C49AAD24A05234007CC1A6 /* CreateAccountViewControllerState.swift in Sources */,
 				90C49AB624A05517007CC1A6 /* Colors.swift in Sources */,
 				90C49A7724A04CFB007CC1A6 /* AppDelegate.swift in Sources */,

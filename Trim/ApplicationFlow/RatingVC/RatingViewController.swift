@@ -10,21 +10,41 @@ import UIKit
 
 class RatingViewController: UIViewController {
 
+    @IBOutlet weak var backgroundView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.setupUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupUI() {
+        backgroundView.layer.cornerRadius = 2
     }
-    */
 
+}
+
+extension RatingViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let nextTag = textField.tag + 1
+        if let nextResponder = textField.superview?.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+}
+
+//MARK: - Render
+private extension RatingViewController {
+    func render(_ state: RatingViewControllerState) {
+        switch state {
+        case .saving:
+            break
+        case .saved:
+            break
+        case .errorSaving(let error):
+            print(error.localizedDescription)
+        }
+    }
 }

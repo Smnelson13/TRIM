@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import RxSwift
 
 class RatingViewController: UIViewController {
     
     private let store = RatingViewControllerStore()
+    let disposeBag = DisposeBag()
     
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var pointsRemainingTextField: UITextField!
@@ -43,13 +45,42 @@ class RatingViewController: UIViewController {
     }
     
     @IBAction func saveButtonTap(_ sender: Any) {
+
+        store.saveUserInfoToFirebase(uikit: uikitTextField.text ?? "0",
+            modularDevelopment: modularDevelopmentTextField.text ?? "0",
+            memoryManagement: memoryManagementTextField.text ?? "0",
+            testing: testingTextField.text ?? "0",
+            coreData: coreDataTextField.text ?? "0",
+            debugging: debuggingTextField.text ?? "0",
+            swiftUI: SwiftUITextField.text ?? "0",
+            problemSolving: problemSolvingTextField.text ?? "0",
+            workingOnTeam: workingOnTeamTextField.text ?? "0",
+            selfMotivation: selfMotivationTextField.text ?? "0",
+            communication: communicationSkillsTextField.text ?? "0",
+            energyLevel: energyLevelTextField.text ?? "0",
+            intelligence: intelligenceTextField.text ?? "0").subscribe(onNext: { _ in
+                
+            }, onError: { error in
+                self.render(.errorSaving(error))
+            }, onCompleted: {
+                self.render(.userSaved)
+            }) {
+                print("Disposed of the Garbage ;)")
+        }.disposed(by: disposeBag)
         
-//        store.saveTextFieldInfo(uikit: "2", modularDevelopment: "2", memoryManagement: "2", testing: "4", coreData: "2", debugging: "2", swiftUI: "2", problemSolving: "2", workingOnTeam: "2", selfMotivation: "2", communication: "2", energyLevel: "2", intelligence: "2", handler: { handler in
-//            self.render(handler)
-//        })
         
-        navigateToSubmitViewController()
-//        self.view.isUserInteractionEnabled = false
+//        let observer = store.observableFunc2(name: "ShaneTEST")
+//        observer.subscribe(onNext: nil, onError: { (error) in
+//            print(error.localizedDescription)
+//        }, onCompleted: {
+//            self.render(.userSaved)
+//        }) {
+//            print("Disposed of Observer")
+//        }.disposed(by: disposeBag)
+        
+        
+        
+        //        self.view.isUserInteractionEnabled = false
 //
 //        if pointsAreValid() {
 //            saveInfo()
@@ -59,23 +90,48 @@ class RatingViewController: UIViewController {
 //        }
     }
     
+    
     func saveInfo() {
-        store.saveTextFieldInfo(uikit: uikitTextField.text ?? "0",
-                                modularDevelopment: modularDevelopmentTextField.text ?? "0",
-                                memoryManagement: memoryManagementTextField.text ?? "0",
-                                testing: testingTextField.text ?? "0",
-                                coreData: coreDataTextField.text ?? "0",
-                                debugging: debuggingTextField.text ?? "0",
-                                swiftUI: SwiftUITextField.text ?? "0",
-                                problemSolving: problemSolvingTextField.text ?? "0",
-                                workingOnTeam: workingOnTeamTextField.text ?? "0",
-                                selfMotivation: selfMotivationTextField.text ?? "0",
-                                communication: communicationSkillsTextField.text ?? "0",
-                                energyLevel: energyLevelTextField.text ?? "0",
-                                intelligence: intelligenceTextField.text ?? "0", handler: { handler in
-                                    self.render(handler)
-        })
+        store.saveUserInfoToFirebase(uikit: uikitTextField.text ?? "0",
+            modularDevelopment: modularDevelopmentTextField.text ?? "0",
+            memoryManagement: memoryManagementTextField.text ?? "0",
+            testing: testingTextField.text ?? "0",
+            coreData: coreDataTextField.text ?? "0",
+            debugging: debuggingTextField.text ?? "0",
+            swiftUI: SwiftUITextField.text ?? "0",
+            problemSolving: problemSolvingTextField.text ?? "0",
+            workingOnTeam: workingOnTeamTextField.text ?? "0",
+            selfMotivation: selfMotivationTextField.text ?? "0",
+            communication: communicationSkillsTextField.text ?? "0",
+            energyLevel: energyLevelTextField.text ?? "0",
+            intelligence: intelligenceTextField.text ?? "0").subscribe(onNext: { _ in
+                
+            }, onError: { error in
+                self.render(.errorSaving(error))
+            }, onCompleted: {
+                self.render(.userSaved)
+            }) {
+                print("Disposed of the Garbage ;)")
+        }.disposed(by: disposeBag)
     }
+    
+//    func saveInfo() {
+//        store.saveTextFieldInfo(uikit: uikitTextField.text ?? "0",
+//                                modularDevelopment: modularDevelopmentTextField.text ?? "0",
+//                                memoryManagement: memoryManagementTextField.text ?? "0",
+//                                testing: testingTextField.text ?? "0",
+//                                coreData: coreDataTextField.text ?? "0",
+//                                debugging: debuggingTextField.text ?? "0",
+//                                swiftUI: SwiftUITextField.text ?? "0",
+//                                problemSolving: problemSolvingTextField.text ?? "0",
+//                                workingOnTeam: workingOnTeamTextField.text ?? "0",
+//                                selfMotivation: selfMotivationTextField.text ?? "0",
+//                                communication: communicationSkillsTextField.text ?? "0",
+//                                energyLevel: energyLevelTextField.text ?? "0",
+//                                intelligence: intelligenceTextField.text ?? "0", handler: { handler in
+//                                    self.render(handler)
+//        })
+//    }
     
     func setTextFieldDelegates() {
         let textFields = getAllTextFields(fromView: self.view)

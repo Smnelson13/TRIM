@@ -48,7 +48,6 @@ class CreateAccountViewController: UIViewController {
     
     func createUser() {
         if textFieldsSatisfied() {
-            // TODO - Add Spinner and disable user taps.
             if let email = userEmail, let password = userPassword {
                 store.createUser(withEmail: email, withPassword: password, handler: { handler in
                     self.render(handler)

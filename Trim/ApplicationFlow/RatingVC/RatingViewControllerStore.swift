@@ -16,7 +16,6 @@ class RatingViewControllerStore {
     
     typealias Handler = (RatingViewControllerState) -> Void
     let auth = Auth.auth()
-    //let ref = Database.database().reference(
     var db = Firestore.firestore()
     
     func saveTextFieldInfo(uikit: String,
@@ -33,10 +32,10 @@ class RatingViewControllerStore {
                         energyLevel: String,
                         intelligence: String, handler: @escaping Handler) {
         
-//        guard let userId = auth.currentUser else {
-//            return
-//        }
-        var ref: DocumentReference? = nil
+        guard let userId = auth.currentUser?.uid else {
+            return
+        }
+      //  var ref: DocumentReference? = nil
         let dict: [String: String] = [
             "Modular development": modularDevelopment,
             "Memory Management (ARC)": memoryManagement,
@@ -52,55 +51,24 @@ class RatingViewControllerStore {
             "Intelligence / Aptitude": intelligence
         ]
         
-        ref = db.collection("users").addDocument(data: dict) { error in
+        db.collection("users").document(userId).setData(dict) { error in
             if let error = error {
                 print(error.localizedDescription)
             } else {
                 print("User Created")
             }
         }
-    }
-    
-//    func createUser(
-//      name: String,
-//      age: Int,
-//      gender: String,
-//      hobbies: String,
-//      profileImage: Data?,
-//      onFinish: @escaping () -> (),
-//      onError: @escaping (Error) -> ()) {
-//
-//      let timeStamp = Int(Date().timeIntervalSince1970)
-//      let userId = timeStamp
-//      UIApplication.shared.isNetworkActivityIndicatorVisible = true
-//      let docRef = self.usersTable.document("\(userId)")
-//      docRef.getDocument { (document, error) in
-//        docRef.setData([
-//          "name": name,
-//          "age": age,
-//          "gender": gender,
-//          "id": userId,
-//          "hobbies": hobbies,
-//          ]) { err in
-//            if let err = err {
-//              print("Error adding document: \(err)")
-//              onError(err)
+        
+        
+        
+//        ref = db.collection("users").addDocument(data: dict) { error in
+//            if let error = error {
+//                print(error.localizedDescription)
 //            } else {
-//              onFinish()
-//              if let image = profileImage {
-//                image.uploadToFirebaseStorage(
-//                  withFileName: "profileImages/\(userId).jpg",
-//                  onFinish: { metadata in
-//                    print("image uploaded", metadata)
-//                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-//                }, onError: { error in
-//                  print("image failed to upload", error)
-//                })
-//              }
+//                print("User Created")
 //            }
 //        }
-//      }
-//    }
+    }
     
 }
 

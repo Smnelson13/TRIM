@@ -77,7 +77,7 @@ class SubmitViewController: UIViewController, UINavigationControllerDelegate {
             return
         }
         emailTextField.text = user.email
-        projectRepoTextField.text = "What?"
+        projectRepoTextField.text = "N/A?"
         projectUrlTextField.text = "https://github.com/Smnelson13/TRIM/tree/develop"
     }
     
@@ -107,8 +107,7 @@ Hello and thank you for taking time to review my coding challenge!
 
 """
             
-            let controller = SMMailComposeViewController(recepients: ["sgilliam@trimagency.com"], subject: "Shane Nelson Coding Challenge", messageBody: messageBody, messageBodyIsHTML: false)
-            controller.setCcRecipients(["sgilliam@trimagency.com", "swiftyshane@gmail.com"])
+            let controller = SMMailComposeViewController(recepients: ["swiftyshane@gmail.com"], subject: "Shane Nelson Coding Challenge", messageBody: messageBody, messageBodyIsHTML: false)
             controller.mailComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
         } else {

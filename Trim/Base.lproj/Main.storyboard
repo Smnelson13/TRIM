@@ -72,9 +72,8 @@
                                     <constraint firstItem="70h-tc-UWx" firstAttribute="top" secondItem="6FX-r6-2MU" secondAttribute="top" constant="16" id="g9L-DY-HJE"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hl-8j-rLb">
-                                <rect key="frame" x="16" y="177" width="382" height="86.5"/>
-                                <string key="text">Welcome, this is an app to self evaluate yourself as a developer. To get started, create and account or login to pick back up where you left off.</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome, this is an app to self evaluate yourself as a developer. To get started, create an account." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hl-8j-rLb">
+                                <rect key="frame" x="16" y="177" width="382" height="65"/>
                                 <fontDescription key="fontDescription" name="MuseoSans-500" family="Museo Sans" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <nil key="highlightedColor"/>

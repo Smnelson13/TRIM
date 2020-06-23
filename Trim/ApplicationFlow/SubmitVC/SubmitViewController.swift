@@ -12,6 +12,9 @@ import FirebaseAuth
 
 class SubmitViewController: UIViewController, UINavigationControllerDelegate {
     
+    var user: User?
+    private let store = SubmitViewControllerStore()
+    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var projectRepoTextField: UITextField!
@@ -26,10 +29,17 @@ class SubmitViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBAction func submitButtonTap(_ sender: Any) {
         if textFieldsSatisfied() {
+            
             launchMailComposeViewController()
         } else {
             showAlert(title: "Error", message: "One or more TextFields is missing info. ")
         }
+    }
+    
+    func saveUserData() {
+        store.saveUserInfo(fullName: nameTextField.text ?? "", profectRepo: "", projectUrl: projectUrlTextField.text ?? "", handler: { handler in
+            self.render(handler)
+        })
     }
     
     func textFieldsSatisfied() -> Bool {
@@ -63,8 +73,22 @@ class SubmitViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     func launchMailComposeViewController() {
+        guard let aUser = user else {
+            return
+        }
         if MFMailComposeViewController.canSendMail() {
-            let controller = SMMailComposeViewController(recepients: ["swiftyshane@gmail.com"], subject: "Shane Nelson Coding Challenge", messageBody: "Body", messageBodyIsHTML: false)
+
+            
+            let messageBody = """
+Hello and thank you for taking time to review my coding challenge!
+
+
+            Self evaluation - UIKit: \(aUser.uiKit), Modular Development: \(aUser.modularDevelopment), Memory Management: \(aUser.memoryManagement), Testing: \(aUser.testing), CoreData: \(aUser.coreData), Debugging: \(aUser.debugging), Problem Solving Skills: \(aUser.problemSolving), SwiftUI: \(aUser.swiftUI), Working on a team: \(aUser.workingOnTeam), Self Motivation: \(aUser.selfMotivation), Communication: \(aUser.communication), Energy Level: \(aUser.energyLevel), Intelligence: \(aUser.intelligence)
+
+"""
+            
+            let controller = SMMailComposeViewController(recepients: ["swiftyshane@gmail.com"], subject: "Shane Nelson Coding Challenge", messageBody: messageBody, messageBodyIsHTML: false)
+            //controller.setCcRecipients(["tim@trimagency.com"])  tim@trimagency.com
             controller.mailComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
         } else {

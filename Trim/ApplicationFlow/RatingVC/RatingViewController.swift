@@ -84,7 +84,7 @@ class RatingViewController: UIViewController {
         })
     }
     
-    // Shared function use for setting delegates and updating the remaining points.
+    // Shared function use for setting delegates and updating the points.
     func getAllTextFields(fromView view: UIView)-> [UITextField] {
         return view.subviews.compactMap { (view) -> [UITextField]? in
             if view is UITextField {
@@ -95,7 +95,6 @@ class RatingViewController: UIViewController {
         }.flatMap({$0})
     }
     
-    //TODO fix this last....
     func updatePointsUsed() {
         pointsRemainingTextField.text = ""
         var textFieldTextAsIntArray: [Int] = []
@@ -136,6 +135,26 @@ class RatingViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if let submitViewController = storyboard.instantiateViewController(withIdentifier: "SubmitViewController") as? SubmitViewController {
+            
+            
+            submitViewController.user = User(id: "",
+                                             coreData: coreDataTextField.text ?? "0",
+                                             uiKit: uikitTextField.text ?? "0",
+                                             email: "",
+                                             name: "",
+                                             projectUrl: "",
+                                             modularDevelopment: modularDevelopmentTextField.text ?? "0",
+                                             memoryManagement: memoryManagementTextField.text ?? "0",
+                                             testing: testingTextField.text ?? "0",
+                                             debugging: debuggingTextField.text ?? "0",
+                                             swiftUI: SwiftUITextField.text ?? "0",
+                                             problemSolving: problemSolvingTextField.text ?? "0",
+                                             workingOnTeam: workingOnTeamTextField.text ?? "0",
+                                             selfMotivation: selfMotivationTextField.text ?? "0",
+                                             communication: communicationSkillsTextField.text ?? "0",
+                                             energyLevel: energyLevelTextField.text ?? "0",
+                                             intelligence: intelligenceTextField.text ?? "0")
+            
             submitViewController.modalPresentationStyle = .fullScreen
             self.present(submitViewController, animated: true, completion: nil)
         } else {

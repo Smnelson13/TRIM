@@ -9,11 +9,13 @@
 import UIKit
 import MessageUI
 import FirebaseAuth
+import RxSwift
 
 class SubmitViewController: UIViewController, UINavigationControllerDelegate {
     
     var user: User?
     private let store = SubmitViewControllerStore()
+    let disposeBag = DisposeBag()
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -27,9 +29,13 @@ class SubmitViewController: UIViewController, UINavigationControllerDelegate {
         prepopulateTextFields()
     }
     
+    @IBAction func backButtonTap(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func submitButtonTap(_ sender: Any) {
         if textFieldsSatisfied() {
-            
+            saveUserData()
             launchMailComposeViewController()
         } else {
             showAlert(title: "Error", message: "One or more TextFields is missing info. ")
@@ -37,9 +43,24 @@ class SubmitViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     func saveUserData() {
-        store.saveUserInfo(fullName: nameTextField.text ?? "", profectRepo: "", projectUrl: projectUrlTextField.text ?? "", handler: { handler in
-            self.render(handler)
-        })
+        
+        store.saveUserInfoToFirebase(name: nameTextField.text ?? "0",
+                                     projectRepo: projectRepoTextField.text ?? "0",
+                                     projectUrl: projectUrlTextField.text ?? "0").subscribe(onNext: { bool in
+                                        
+                                     }, onError: { error in
+                                        self.render(.submitError(error))
+                                     }, onCompleted: {
+                                        self.render(.submitSuccess)
+                                     }) {
+                                        print("Disposed of the garbage ;)")
+        }.disposed(by: disposeBag)
+        
+        
+        
+//        store.saveUserInfo(fullName: nameTextField.text ?? "", profectRepo: "", projectUrl: projectUrlTextField.text ?? "", handler: { handler in
+//            self.render(handler)
+//        })
     }
     
     func textFieldsSatisfied() -> Bool {
@@ -149,7 +170,7 @@ extension SubmitViewController {
         case .submitError(_):
             break
         case .submitSuccess:
-            break
+            print("User info was saved for resale at a later date...")
         }
     }
 }

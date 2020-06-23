@@ -54,7 +54,7 @@ class CreateAccountViewController: UIViewController {
                 })
             }
         } else {
-            print("NOT Satisfied")
+            showAlert(title: "Error", message: "One or more textfields are missing info.")
         }
     }
     
@@ -114,16 +114,16 @@ private extension CreateAccountViewController {
         switch state {
         case .creatingUserFailure(let error):
             print(error.localizedDescription)
-            break
+            showAlert(title: "Error", message: "Unable to create user at this time.")
         case .invalidEmail:
-            break
+            showAlert(title: "Error", message: "Email is invalid.")
         case .userAlreadyExists:
             showAlert(title: "Error", message: "A user with that email already exists.")
         case .userCreated:
             showAlertWithNavigation()
             print("User Created!")
         case .invalidPassword:
-            break
+            showAlert(title: "Error", message: "Password is invalid.")
         }
     }
 }

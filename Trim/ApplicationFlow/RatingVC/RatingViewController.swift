@@ -45,13 +45,13 @@ class RatingViewController: UIViewController {
     }
     
     @IBAction func saveButtonTap(_ sender: Any) {
-        navigateToSubmitViewController()
-//        if pointsAreValid() {
-//            saveInfo()
-//        } else {
-//            showAlert(title: "Error", message: "Points Cannot be greater than 50.", navigateOnCompletion: false)
-//            self.view.isUserInteractionEnabled = true
-//        }
+//        navigateToSubmitViewController()
+        if pointsAreValid() {
+            saveInfo()
+        } else {
+            showAlert(title: "Error", message: "Points Cannot be greater than 50.", navigateOnCompletion: false)
+            self.view.isUserInteractionEnabled = true
+        }
     }
     
     
@@ -127,7 +127,7 @@ class RatingViewController: UIViewController {
         
         let sumOfTextFieldValues = textFieldValues.reduce(0, +)
         
-        if sumOfTextFieldValues > 50 {
+        if sumOfTextFieldValues >= 50 {
             return false
         }
         return true
@@ -158,8 +158,7 @@ class RatingViewController: UIViewController {
                                              intelligence: intelligenceTextField.text ?? "0")
             
             submitViewController.modalPresentationStyle = .fullScreen
-            self.navigationController?.present(submitViewController, animated: true, completion: nil)
-            //self.present(submitViewController, animated: true, completion: nil)
+            self.present(submitViewController, animated: true, completion: nil)
         } else {
             preconditionFailure("Could not navigate to SubmitViewController")
         }

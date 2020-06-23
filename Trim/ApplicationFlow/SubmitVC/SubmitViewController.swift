@@ -24,7 +24,7 @@ class SubmitViewController: UIViewController, UINavigationControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        overrideUserInterfaceStyle = .light
+        setUI()
         setDelegates()
         prepopulateTextFields()
     }
@@ -42,6 +42,11 @@ class SubmitViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
     
+    func setUI() {
+        self.view.backgroundColor = .trimGreen
+        overrideUserInterfaceStyle = .light
+    }
+    
     func saveUserData() {
         
         store.saveUserInfoToFirebase(name: nameTextField.text ?? "0",
@@ -55,12 +60,6 @@ class SubmitViewController: UIViewController, UINavigationControllerDelegate {
                                      }) {
                                         print("Disposed of the garbage ;)")
         }.disposed(by: disposeBag)
-        
-        
-        
-//        store.saveUserInfo(fullName: nameTextField.text ?? "", profectRepo: "", projectUrl: projectUrlTextField.text ?? "", handler: { handler in
-//            self.render(handler)
-//        })
     }
     
     func textFieldsSatisfied() -> Bool {
@@ -108,8 +107,8 @@ Hello and thank you for taking time to review my coding challenge!
 
 """
             
-            let controller = SMMailComposeViewController(recepients: ["swiftyshane@gmail.com"], subject: "Shane Nelson Coding Challenge", messageBody: messageBody, messageBodyIsHTML: false)
-            //controller.setCcRecipients(["tim@trimagency.com"])  tim@trimagency.com
+            let controller = SMMailComposeViewController(recepients: ["sgilliam@trimagency.com"], subject: "Shane Nelson Coding Challenge", messageBody: messageBody, messageBodyIsHTML: false)
+            controller.setCcRecipients(["sgilliam@trimagency.com", "swiftyshane@gmail.com"])
             controller.mailComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
         } else {
@@ -125,7 +124,7 @@ Hello and thank you for taking time to review my coding challenge!
 
 }
 
-//MARK: - MailComposeDelegate
+//MARK: - MailComposeDelegate used to send the email at the end.
 extension SubmitViewController: MFMailComposeViewControllerDelegate {
    
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {

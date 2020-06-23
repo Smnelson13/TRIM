@@ -14,8 +14,8 @@ class RatingViewController: UIViewController {
     private let store = RatingViewControllerStore()
     let disposeBag = DisposeBag()
     
+    @IBOutlet weak var pointsUsedLabel: UILabel!
     @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var pointsRemainingTextField: UITextField!
     
     @IBOutlet weak var uikitTextField: UITextField!
     @IBOutlet weak var modularDevelopmentTextField: UITextField!
@@ -38,14 +38,13 @@ class RatingViewController: UIViewController {
     }
     
     func setupUI() {
+        self.backgroundView.backgroundColor = .trimGreen
         overrideUserInterfaceStyle = .light
         backgroundView.layer.cornerRadius = 2
-        pointsRemainingTextField.isUserInteractionEnabled = false
-        pointsRemainingTextField.text = "0"
+        pointsUsedLabel.text = "0"
     }
     
     @IBAction func saveButtonTap(_ sender: Any) {
-//        navigateToSubmitViewController()
         if pointsAreValid() {
             saveInfo()
         } else {
@@ -86,7 +85,7 @@ class RatingViewController: UIViewController {
         })
     }
     
-    // Shared function use for setting delegates and updating the points.
+    // Getting all the textfields prove to be a common need. this helper gets all the textfield from a given view. 
     func getAllTextFields(fromView view: UIView)-> [UITextField] {
         return view.subviews.compactMap { (view) -> [UITextField]? in
             if view is UITextField {
@@ -98,7 +97,7 @@ class RatingViewController: UIViewController {
     }
     
     func updatePointsUsed() {
-        pointsRemainingTextField.text = ""
+        pointsUsedLabel.text = ""
         var textFieldTextAsIntArray: [Int] = []
         
         let textfields = getAllTextFields(fromView: self.view)
@@ -110,7 +109,7 @@ class RatingViewController: UIViewController {
             }
         })
         let pointsUsed = textFieldTextAsIntArray.reduce(0, +)
-        pointsRemainingTextField.text = "\(pointsUsed)"
+        pointsUsedLabel.text = "\(pointsUsed)"
     }
     
     func pointsAreValid() -> Bool {
@@ -127,7 +126,7 @@ class RatingViewController: UIViewController {
         
         let sumOfTextFieldValues = textFieldValues.reduce(0, +)
         
-        if sumOfTextFieldValues >= 50 {
+        if sumOfTextFieldValues > 50 {
             return false
         }
         return true

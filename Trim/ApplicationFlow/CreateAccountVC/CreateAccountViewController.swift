@@ -28,16 +28,13 @@ class CreateAccountViewController: UIViewController {
     }
     
     func setupUI() {
+        self.backgroundView.backgroundColor = .trimGreen
         backgroundView.layer.cornerRadius = 2
         overrideUserInterfaceStyle = .light
     }
 
     @IBAction func createAccountButtonTap(_ sender: Any) {
         createUser()
-    }
-    
-    @IBAction func loginButtonTap(_ sender: Any) {
-        navigateToRatingViewController()
     }
     
     func setDelegates() {

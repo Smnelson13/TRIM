@@ -28,10 +28,7 @@ class CreateAccountStore {
                 default:
                     print(error.localizedDescription)
                 }
-            }
-            else if let user = result?.user {
-                let key = UserDefaults.Keys.userId.rawValue
-                self.defaults.set(user.uid, forKey: key)
+            } else {
                 handler(.userCreated)
             }
         })

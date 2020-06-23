@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import RxSwift
 
-
+// The brain for the SubmitViewController store.
 class SubmitViewControllerStore {
     
     typealias Handler = (SubmitViewControllerState) -> Void

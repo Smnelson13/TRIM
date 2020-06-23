@@ -19,7 +19,6 @@
 		90C49AAB24A05226007CC1A6 /* CreateAccountViewControllerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C49AAA24A05226007CC1A6 /* CreateAccountViewControllerStore.swift */; };
 		90C49AAD24A05234007CC1A6 /* CreateAccountViewControllerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C49AAC24A05234007CC1A6 /* CreateAccountViewControllerState.swift */; };
 		90C49AB124A053CB007CC1A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 90C49AB024A053CB007CC1A6 /* GoogleService-Info.plist */; };
-		90C49AB424A054F8007CC1A6 /* Extensions+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C49AB324A054F8007CC1A6 /* Extensions+Utils.swift */; };
 		90C49AB624A05517007CC1A6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C49AB524A05516007CC1A6 /* Colors.swift */; };
 		90C49AC224A06192007CC1A6 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C49AC124A06192007CC1A6 /* RatingViewController.swift */; };
 		90C49AC624A06C09007CC1A6 /* MuseoSans_500.otf in Resources */ = {isa = PBXBuildFile; fileRef = 90C49AC524A06BC9007CC1A6 /* MuseoSans_500.otf */; };
@@ -75,7 +74,6 @@
 		90C49AAA24A05226007CC1A6 /* CreateAccountViewControllerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewControllerStore.swift; sourceTree = "<group>"; };
 		90C49AAC24A05234007CC1A6 /* CreateAccountViewControllerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewControllerState.swift; sourceTree = "<group>"; };
 		90C49AB024A053CB007CC1A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		90C49AB324A054F8007CC1A6 /* Extensions+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Utils.swift"; sourceTree = "<group>"; };
 		90C49AB524A05516007CC1A6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		90C49AC124A06192007CC1A6 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		90C49AC524A06BC9007CC1A6 /* MuseoSans_500.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MuseoSans_500.otf; path = "../../../../../Downloads/exljbris/Museo™ Sans/MuseoSans_500.otf"; sourceTree = "<group>"; };
@@ -222,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				90C49AC324A06ACB007CC1A6 /* UI */,
-				90C49AB324A054F8007CC1A6 /* Extensions+Utils.swift */,
 				90C49AD624A1250D007CC1A6 /* SMMailComposeViewController.swift */,
 				90C49ADE24A259CD007CC1A6 /* User.swift */,
 			);
@@ -504,7 +501,6 @@
 				90C49AD324A118AC007CC1A6 /* SubmitViewControllerStore.swift in Sources */,
 				90C49AC224A06192007CC1A6 /* RatingViewController.swift in Sources */,
 				90C49AD724A1250D007CC1A6 /* SMMailComposeViewController.swift in Sources */,
-				90C49AB424A054F8007CC1A6 /* Extensions+Utils.swift in Sources */,
 				90C49AC824A0796A007CC1A6 /* RatingViewControllerState.swift in Sources */,
 				90C49AD524A118D2007CC1A6 /* SubmitViewControllerState.swift in Sources */,
 				90C49ADF24A259CD007CC1A6 /* User.swift in Sources */,

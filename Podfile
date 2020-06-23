@@ -11,6 +11,7 @@ target 'Trim' do
   pod 'Firebase/Database'
   pod 'FirebaseStorage'
   pod 'RxSwift'
+  pod 'Firebase/Firestore'
 
   target 'TrimTests' do
     inherit! :search_paths

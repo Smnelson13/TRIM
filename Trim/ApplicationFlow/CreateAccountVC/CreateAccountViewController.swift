@@ -24,6 +24,7 @@ class CreateAccountViewController: UIViewController {
         super.viewDidLoad()
 
         self.setupUI()
+        setDelegates()
     }
     
     func setupUI() {
@@ -46,6 +47,12 @@ class CreateAccountViewController: UIViewController {
     
     @IBAction func loginButtonTap(_ sender: Any) {
         navigateToRatingViewController()
+    }
+    
+    func setDelegates() {
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
     }
     
     func createUser() {
@@ -88,6 +95,14 @@ class CreateAccountViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func showAlertWithNavigation() {
+        let alert = UIAlertController(title: "Success", message: "User Saved", preferredStyle: .alert)
+             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
+                 self.navigateToRatingViewController()
+             }))
+        self.present(alert, animated: true, completion: nil)
+    }
 
 }
 
@@ -115,7 +130,7 @@ private extension CreateAccountViewController {
         case .userAlreadyExists:
             showAlert(title: "Error", message: "A user with that email already exists.")
         case .userCreated:
-            showAlert(title: "Success", message: "User Created")
+            showAlertWithNavigation()
             print("User Created!")
         case .invalidPassword:
             break

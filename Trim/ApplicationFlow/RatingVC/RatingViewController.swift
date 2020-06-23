@@ -43,6 +43,9 @@ class RatingViewController: UIViewController {
     }
     
     @IBAction func saveButtonTap(_ sender: Any) {
+        store.saveTextFieldInfo(uikit: "2", modularDevelopment: "2", memoryManagement: "2", testing: "4", coreData: "2", debugging: "2", swiftUI: "2", problemSolving: "2", workingOnTeam: "2", selfMotivation: "2", communication: "2", energyLevel: "2", intelligence: "2", handler: { handler in
+            self.render(handler)
+        })
 //        self.view.isUserInteractionEnabled = false
 //
 //        if pointsAreValid() {
@@ -51,23 +54,23 @@ class RatingViewController: UIViewController {
 //        } else {
 //            showAlert(title: "Error", message: "Points Cannot be greater than 50.")
 //        }
-        navigateToSubmitViewController()
+//        navigateToSubmitViewController()
     }
     
     func saveInfo() {
-        store.saveTextFieldInfo(uikit: uikitTextField.text ?? "",
-                                modularDevelopment: modularDevelopmentTextField.text ?? "",
-                                memoryManagement: memoryManagementTextField.text ?? "",
-                                testing: testingTextField.text ?? "",
-                                coreData: coreDataTextField.text ?? "",
-                                debugging: debuggingTextField.text ?? "",
-                                problemSolving: problemSolvingTextField.text ?? "",
-                                swiftUI: SwiftUITextField.text ?? "",
-                                workingOnTeam: workingOnTeamTextField.text ?? "",
-                                selfMotivation: selfMotivationTextField.text ?? "",
-                                communication: communicationSkillsTextField.text ?? "",
-                                energyLevel: energyLevelTextField.text ?? "",
-                                intelligence: intelligenceTextField.text ?? "", handler: { handler in
+        store.saveTextFieldInfo(uikit: uikitTextField.text ?? "0",
+                                modularDevelopment: modularDevelopmentTextField.text ?? "0",
+                                memoryManagement: memoryManagementTextField.text ?? "0",
+                                testing: testingTextField.text ?? "0",
+                                coreData: coreDataTextField.text ?? "0",
+                                debugging: debuggingTextField.text ?? "0",
+                                swiftUI: SwiftUITextField.text ?? "0",
+                                problemSolving: problemSolvingTextField.text ?? "0",
+                                workingOnTeam: workingOnTeamTextField.text ?? "0",
+                                selfMotivation: selfMotivationTextField.text ?? "0",
+                                communication: communicationSkillsTextField.text ?? "0",
+                                energyLevel: energyLevelTextField.text ?? "0",
+                                intelligence: intelligenceTextField.text ?? "0", handler: { handler in
                                     self.render(handler)
         })
     }

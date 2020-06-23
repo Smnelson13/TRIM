@@ -45,43 +45,7 @@ class RatingViewController: UIViewController {
     }
     
     @IBAction func saveButtonTap(_ sender: Any) {
-
-        store.saveUserInfoToFirebase(uikit: uikitTextField.text ?? "0",
-            modularDevelopment: modularDevelopmentTextField.text ?? "0",
-            memoryManagement: memoryManagementTextField.text ?? "0",
-            testing: testingTextField.text ?? "0",
-            coreData: coreDataTextField.text ?? "0",
-            debugging: debuggingTextField.text ?? "0",
-            swiftUI: SwiftUITextField.text ?? "0",
-            problemSolving: problemSolvingTextField.text ?? "0",
-            workingOnTeam: workingOnTeamTextField.text ?? "0",
-            selfMotivation: selfMotivationTextField.text ?? "0",
-            communication: communicationSkillsTextField.text ?? "0",
-            energyLevel: energyLevelTextField.text ?? "0",
-            intelligence: intelligenceTextField.text ?? "0").subscribe(onNext: { _ in
-                
-            }, onError: { error in
-                self.render(.errorSaving(error))
-            }, onCompleted: {
-                self.render(.userSaved)
-            }) {
-                print("Disposed of the Garbage ;)")
-        }.disposed(by: disposeBag)
-        
-        
-//        let observer = store.observableFunc2(name: "ShaneTEST")
-//        observer.subscribe(onNext: nil, onError: { (error) in
-//            print(error.localizedDescription)
-//        }, onCompleted: {
-//            self.render(.userSaved)
-//        }) {
-//            print("Disposed of Observer")
-//        }.disposed(by: disposeBag)
-        
-        
-        
-        //        self.view.isUserInteractionEnabled = false
-//
+        navigateToSubmitViewController()
 //        if pointsAreValid() {
 //            saveInfo()
 //        } else {
@@ -114,24 +78,6 @@ class RatingViewController: UIViewController {
                 print("Disposed of the Garbage ;)")
         }.disposed(by: disposeBag)
     }
-    
-//    func saveInfo() {
-//        store.saveTextFieldInfo(uikit: uikitTextField.text ?? "0",
-//                                modularDevelopment: modularDevelopmentTextField.text ?? "0",
-//                                memoryManagement: memoryManagementTextField.text ?? "0",
-//                                testing: testingTextField.text ?? "0",
-//                                coreData: coreDataTextField.text ?? "0",
-//                                debugging: debuggingTextField.text ?? "0",
-//                                swiftUI: SwiftUITextField.text ?? "0",
-//                                problemSolving: problemSolvingTextField.text ?? "0",
-//                                workingOnTeam: workingOnTeamTextField.text ?? "0",
-//                                selfMotivation: selfMotivationTextField.text ?? "0",
-//                                communication: communicationSkillsTextField.text ?? "0",
-//                                energyLevel: energyLevelTextField.text ?? "0",
-//                                intelligence: intelligenceTextField.text ?? "0", handler: { handler in
-//                                    self.render(handler)
-//        })
-//    }
     
     func setTextFieldDelegates() {
         let textFields = getAllTextFields(fromView: self.view)
@@ -212,7 +158,8 @@ class RatingViewController: UIViewController {
                                              intelligence: intelligenceTextField.text ?? "0")
             
             submitViewController.modalPresentationStyle = .fullScreen
-            self.present(submitViewController, animated: true, completion: nil)
+            self.navigationController?.present(submitViewController, animated: true, completion: nil)
+            //self.present(submitViewController, animated: true, completion: nil)
         } else {
             preconditionFailure("Could not navigate to SubmitViewController")
         }

@@ -36,10 +36,4 @@ class CreateAccountStore {
             }
         })
     }
-    
-    
-//    func createRxUser(email: String, password: String) -> Observable<Result<Any, Error>> {
-//
-//
-//    }
 }

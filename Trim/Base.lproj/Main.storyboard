@@ -142,7 +142,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="pHV-a6-xiz">
                                                 <rect key="frame" x="0.0" y="88" width="350" height="34"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points Remaining:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UbU-WL-fSJ">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points Used:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UbU-WL-fSJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="216" height="34"/>
                                                         <fontDescription key="fontDescription" name="MuseoSans-500" family="Museo Sans" pointSize="12"/>
                                                         <color key="textColor" red="0.92267034449999996" green="1" blue="0.74129830259999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -542,6 +542,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p1l-2Z-1RW">
                                                 <rect key="frame" x="0.0" y="0.0" width="318" height="34"/>
                                                 <color key="backgroundColor" red="0.89729768040000002" green="0.99118524789999995" blue="0.89802211519999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -590,6 +591,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oid-Ro-pE2"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="iUJ-kP-l4H" id="BZf-SY-Cxl"/>
+                        <outlet property="nameTextField" destination="p1l-2Z-1RW" id="ckd-Zh-5cf"/>
+                        <outlet property="projectRepoTextField" destination="eRK-Ic-bFV" id="hDt-Kb-K7e"/>
+                        <outlet property="projectUrlTextField" destination="GgT-SP-VQa" id="ZIu-Le-WVj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gt6-9j-jwl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -35,7 +35,6 @@ class RatingViewControllerStore {
         guard let userId = auth.currentUser?.uid else {
             return
         }
-      //  var ref: DocumentReference? = nil
         let dict: [String: String] = [
             "Modular development": modularDevelopment,
             "Memory Management (ARC)": memoryManagement,
@@ -53,21 +52,12 @@ class RatingViewControllerStore {
         
         db.collection("users").document(userId).setData(dict) { error in
             if let error = error {
-                print(error.localizedDescription)
+                handler(.errorSaving(error))
             } else {
+                handler(.userSaved)
                 print("User Created")
             }
         }
-        
-        
-        
-//        ref = db.collection("users").addDocument(data: dict) { error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//            } else {
-//                print("User Created")
-//            }
-//        }
     }
     
 }

@@ -29,17 +29,8 @@ class CreateAccountViewController: UIViewController {
     
     func setupUI() {
         backgroundView.layer.cornerRadius = 2
+        overrideUserInterfaceStyle = .light
     }
-    
-//    init(store: CreateAccountStore) {
-//        self.store = store
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        self.store = CreateAccountStore()
-//        super.init(nibName: nil, bundle: nil)
-//    }
 
     @IBAction func createAccountButtonTap(_ sender: Any) {
         createUser()

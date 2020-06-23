@@ -9,7 +9,6 @@
 import Foundation
 
 enum RatingViewControllerState {
-    case saving
-    case saved
+    case userSaved
     case errorSaving(Error)
 }

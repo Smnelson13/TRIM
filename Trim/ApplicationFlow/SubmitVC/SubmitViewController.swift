@@ -8,30 +8,54 @@
 
 import UIKit
 import MessageUI
+import FirebaseAuth
 
 class SubmitViewController: UIViewController, UINavigationControllerDelegate {
-
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var projectRepoTextField: UITextField!
+    @IBOutlet weak var projectUrlTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        overrideUserInterfaceStyle = .light
+        setDelegates()
+        prepopulateTextFields()
     }
     
     @IBAction func submitButtonTap(_ sender: Any) {
-        //showMailComposeViewController()
-        launchMailComposeViewController()
+        if textFieldsSatisfied() {
+            launchMailComposeViewController()
+        } else {
+            showAlert(title: "Error", message: "One or more TextFields is missing info. ")
+        }
     }
     
-    func sendEmail() {
-        if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients(["you@yoursite.com"])
-            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
-
-            present(mail, animated: true)
-        } else {
-            // show failure alert
+    func textFieldsSatisfied() -> Bool {
+        if emailTextField.text != "",
+            nameTextField.text != "",
+            projectUrlTextField.text != "",
+            projectRepoTextField.text != "" {
+            return true
         }
+        return false
+    }
+    
+    func prepopulateTextFields() {
+        guard let user = Auth.auth().currentUser else {
+            return
+        }
+        emailTextField.text = user.email
+        projectRepoTextField.text = "What?"
+        projectUrlTextField.text = "https://github.com/Smnelson13/TRIM/tree/develop"
+    }
+    
+    func setDelegates() {
+        nameTextField.delegate = self
+        emailTextField.delegate = self
+        projectUrlTextField.delegate = self
+        projectRepoTextField.delegate = self
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
@@ -43,6 +67,8 @@ class SubmitViewController: UIViewController, UINavigationControllerDelegate {
             let controller = SMMailComposeViewController(recepients: ["swiftyshane@gmail.com"], subject: "Shane Nelson Coding Challenge", messageBody: "Body", messageBodyIsHTML: false)
             controller.mailComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
+        } else {
+            showAlert(title: "Error", message: "Device cannot send emails.")
         }
     }
     
@@ -77,6 +103,19 @@ extension SubmitViewController: MFMailComposeViewControllerDelegate {
         }
         controller.dismiss(animated: true, completion: nil)
     }
+}
+
+//MARK: - TextFieldDelegate
+extension SubmitViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+           let nextTag = textField.tag + 1
+           if let nextResponder = textField.superview?.viewWithTag(nextTag) {
+               nextResponder.becomeFirstResponder()
+           } else {
+               textField.resignFirstResponder()
+           }
+           return true
+       }
 }
 
 //MARK: - Render

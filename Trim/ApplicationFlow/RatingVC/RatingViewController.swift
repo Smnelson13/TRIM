@@ -10,7 +10,6 @@ import UIKit
 
 class RatingViewController: UIViewController {
     
-    var pointsRemaining: Int?
     private let store = RatingViewControllerStore()
     
     @IBOutlet weak var backgroundView: UIView!
@@ -37,24 +36,27 @@ class RatingViewController: UIViewController {
     }
     
     func setupUI() {
+        overrideUserInterfaceStyle = .light
         backgroundView.layer.cornerRadius = 2
         pointsRemainingTextField.isUserInteractionEnabled = false
-        pointsRemainingTextField.text = "50"
+        pointsRemainingTextField.text = "0"
     }
     
     @IBAction func saveButtonTap(_ sender: Any) {
-        store.saveTextFieldInfo(uikit: "2", modularDevelopment: "2", memoryManagement: "2", testing: "4", coreData: "2", debugging: "2", swiftUI: "2", problemSolving: "2", workingOnTeam: "2", selfMotivation: "2", communication: "2", energyLevel: "2", intelligence: "2", handler: { handler in
-            self.render(handler)
-        })
+        
+//        store.saveTextFieldInfo(uikit: "2", modularDevelopment: "2", memoryManagement: "2", testing: "4", coreData: "2", debugging: "2", swiftUI: "2", problemSolving: "2", workingOnTeam: "2", selfMotivation: "2", communication: "2", energyLevel: "2", intelligence: "2", handler: { handler in
+//            self.render(handler)
+//        })
+        
+        navigateToSubmitViewController()
 //        self.view.isUserInteractionEnabled = false
 //
 //        if pointsAreValid() {
-//            print("Points are valid")
 //            saveInfo()
 //        } else {
-//            showAlert(title: "Error", message: "Points Cannot be greater than 50.")
+//            showAlert(title: "Error", message: "Points Cannot be greater than 50.", navigateOnCompletion: false)
+//            self.view.isUserInteractionEnabled = true
 //        }
-//        navigateToSubmitViewController()
     }
     
     func saveInfo() {
@@ -93,26 +95,21 @@ class RatingViewController: UIViewController {
         }.flatMap({$0})
     }
     
-    func updatePointsRemaining() {
+    //TODO fix this last....
+    func updatePointsUsed() {
+        pointsRemainingTextField.text = ""
         var textFieldTextAsIntArray: [Int] = []
-        //textFieldTextAsIntArray = [] // Reset the array each time.
-        pointsRemaining = 0
         
-        let textFields = getAllTextFields(fromView: self.view)
-        
-        textFields.forEach({ textField in
-            if let text = textField.text {
+        let textfields = getAllTextFields(fromView: self.view)
+        textfields.forEach({ textfield in
+            if let text = textfield.text {
                 if let textAsNumber = Int(text) {
                     textFieldTextAsIntArray.insert(textAsNumber, at: 0)
                 }
-//                else {
-//                    print("Failed to cast string as Int.")
-//                }
             }
         })
-        let sumOfTextFields = (50 - textFieldTextAsIntArray.reduce(0, +))
-        pointsRemainingTextField.text = "\(sumOfTextFields)"
-        //pointsRemaining = sumOfTextFields
+        let pointsUsed = textFieldTextAsIntArray.reduce(0, +)
+        pointsRemainingTextField.text = "\(pointsUsed)"
     }
     
     func pointsAreValid() -> Bool {
@@ -146,9 +143,15 @@ class RatingViewController: UIViewController {
         }
     }
     
-    func showAlert(title: String, message: String) {
+    func showAlert(title: String, message: String, navigateOnCompletion: Bool) {
         let alert = UIAlertController(title: title , message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+        if !navigateOnCompletion {
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+        } else {
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: { _ in
+                self.navigateToSubmitViewController()
+            }))
+        }
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -157,7 +160,7 @@ class RatingViewController: UIViewController {
 extension RatingViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        updatePointsRemaining()
+        updatePointsUsed()
         let nextTag = textField.tag + 1
         if let nextResponder = textField.superview?.viewWithTag(nextTag) {
             nextResponder.becomeFirstResponder()
@@ -175,13 +178,10 @@ private extension RatingViewController {
         self.view.isUserInteractionEnabled = true
         
         switch state {
-        case .saving:
-            break
-        case .saved:
-            break
+        case .userSaved:
+            showAlert(title: "Success", message: "User successfully saved", navigateOnCompletion: true)
         case .errorSaving(let error):
-            
-            print(error.localizedDescription)
+            showAlert(title: "Error", message: "Unable to save user with error \(error)", navigateOnCompletion: false)
         }
     }
 }
